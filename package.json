@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:build": "tsc -w",
-    "start:run": "nodemon build/index.js",
+    "start:run": "nodemon build/app.js",
     "start": "concurrently npm:start:*"
   },
   "repository": {
@@ -26,8 +26,14 @@
     "body-parser": "^1.19.0",
     "concurrently": "^6.2.0",
     "cookie-session": "^1.4.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "mongoose": "^5.12.12",
     "nodemon": "^2.0.7",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "typedi": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.10.5"
   }
 }

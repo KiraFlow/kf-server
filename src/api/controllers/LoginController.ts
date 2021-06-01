@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {get, post, controller, bodyValidator} from "./decorators";
+import {get, post, controller, bodyValidator} from "../decorators";
 
 @controller('/auth')
 class LoginController {
