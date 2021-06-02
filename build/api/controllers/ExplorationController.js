@@ -16,6 +16,14 @@ var ExplorationController = /** @class */ (function () {
     function ExplorationController(userStoryService) {
         this.userStoryService = userStoryService;
     }
+    ExplorationController.prototype.deleteStory = function (req, res) {
+        var userStoryId = req.body.userStoryId;
+        var userStoryServiceInstance = typedi_1.Container.get(UserStoryService_1.UserStoryService);
+        userStoryServiceInstance.deleteUserStory(userStoryId).then(function (result) {
+            res.send(result);
+        });
+        res.send('deleted!');
+    };
     ExplorationController.prototype.getStories = function (req, res) {
         var userStoryServiceInstance = typedi_1.Container.get(UserStoryService_1.UserStoryService);
         userStoryServiceInstance.getUserStories().then(function (result) {
@@ -23,14 +31,17 @@ var ExplorationController = /** @class */ (function () {
         });
     };
     ExplorationController.prototype.createStory = function (req, res) {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        res.header('Access-Control-Allow-Headers', 'Content-Type');
         var userStory = req.body;
         var userStoryServiceInstance = typedi_1.Container.get(UserStoryService_1.UserStoryService);
         userStoryServiceInstance.createUserStory(userStory).then(function (r) { return console.log(r); });
         res.send('created!');
     };
+    __decorate([
+        decorators_1.del('/delete'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", void 0)
+    ], ExplorationController.prototype, "deleteStory", null);
     __decorate([
         decorators_1.get('/get'),
         __metadata("design:type", Function),

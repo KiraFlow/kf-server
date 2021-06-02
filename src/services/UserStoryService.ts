@@ -14,6 +14,14 @@ export class UserStoryService {
         return true;
     }
 
+    async deleteUserStory(userStoryId: string) {
+        try {
+            return await UserStory.deleteOne({_id: userStoryId});
+        } catch (err) {
+            throw err;
+        }
+    }
+
     async getUserStories() {
         try {
             return await UserStory.find({});
