@@ -65,15 +65,17 @@ var UserStoryService = /** @class */ (function () {
             });
         });
     };
-    UserStoryService.prototype.deleteUserStory = function (userStoryId) {
+    UserStoryService.prototype.updateUserStory = function (story, storyId) {
         return __awaiter(this, void 0, void 0, function () {
             var err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, userStory_1.UserStory.deleteOne({ _id: userStoryId })];
-                    case 1: return [2 /*return*/, _a.sent()];
+                        return [4 /*yield*/, userStory_1.UserStory.updateOne({ _id: storyId }, story)];
+                    case 1:
+                        _a.sent();
+                        return [3 /*break*/, 3];
                     case 2:
                         err_1 = _a.sent();
                         throw err_1;
@@ -82,9 +84,26 @@ var UserStoryService = /** @class */ (function () {
             });
         });
     };
-    UserStoryService.prototype.getUserStories = function () {
+    UserStoryService.prototype.deleteUserStory = function (userStoryId) {
         return __awaiter(this, void 0, void 0, function () {
             var err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, userStory_1.UserStory.deleteOne({ _id: userStoryId })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                    case 2:
+                        err_2 = _a.sent();
+                        throw err_2;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    UserStoryService.prototype.getUserStories = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -92,8 +111,8 @@ var UserStoryService = /** @class */ (function () {
                         return [4 /*yield*/, userStory_1.UserStory.find({})];
                     case 1: return [2 /*return*/, _a.sent()];
                     case 2:
-                        err_2 = _a.sent();
-                        throw err_2;
+                        err_3 = _a.sent();
+                        throw err_3;
                     case 3: return [2 /*return*/];
                 }
             });

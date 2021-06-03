@@ -22,7 +22,6 @@ var ExplorationController = /** @class */ (function () {
         userStoryServiceInstance.deleteUserStory(userStoryId).then(function (result) {
             res.send(result);
         });
-        res.send('deleted!');
     };
     ExplorationController.prototype.getStories = function (req, res) {
         var userStoryServiceInstance = typedi_1.Container.get(UserStoryService_1.UserStoryService);
@@ -34,7 +33,13 @@ var ExplorationController = /** @class */ (function () {
         var userStory = req.body;
         var userStoryServiceInstance = typedi_1.Container.get(UserStoryService_1.UserStoryService);
         userStoryServiceInstance.createUserStory(userStory).then(function (r) { return console.log(r); });
-        res.send('created!');
+    };
+    ExplorationController.prototype.patchStory = function (req, res) {
+        var userStoryId = req.body._id;
+        var userStory = req.body;
+        var userStoryServiceInstance = typedi_1.Container.get(UserStoryService_1.UserStoryService);
+        userStoryServiceInstance.updateUserStory(userStory, userStoryId).then(function (r) { return console.log(r); });
+        res.send('patched!');
     };
     __decorate([
         decorators_1.del('/delete'),
@@ -54,6 +59,12 @@ var ExplorationController = /** @class */ (function () {
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
     ], ExplorationController.prototype, "createStory", null);
+    __decorate([
+        decorators_1.put('/put'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", void 0)
+    ], ExplorationController.prototype, "patchStory", null);
     ExplorationController = __decorate([
         decorators_1.controller('/exploration'),
         __metadata("design:paramtypes", [UserStoryService_1.UserStoryService])

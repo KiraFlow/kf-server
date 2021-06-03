@@ -14,6 +14,14 @@ export class UserStoryService {
         return true;
     }
 
+    async updateUserStory(story: UserStoryInterface, storyId: string) {
+        try {
+            await UserStory.updateOne({_id: storyId},  story);
+        } catch (err) {
+            throw err;
+        }
+    }
+
     async deleteUserStory(userStoryId: string) {
         try {
             return await UserStory.deleteOne({_id: userStoryId});

@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {get, post, del, controller} from "../decorators";
+import {get, post, del, put, controller} from "../decorators";
 import {UserStoryService} from "../../services/UserStoryService";
 import {Container, Service} from 'typedi';
 import {UserStoryInterface} from "../../models/userStories/userStoryInterface";
@@ -20,7 +20,6 @@ class ExplorationController {
         userStoryServiceInstance.deleteUserStory(userStoryId).then(function (result: any) {
             res.send(result);
         });
-        res.send('deleted!');
     }
 
     @get('/get')
@@ -36,7 +35,14 @@ class ExplorationController {
         let userStory: UserStoryInterface = req.body;
         const userStoryServiceInstance = Container.get(UserStoryService);
         userStoryServiceInstance.createUserStory(userStory).then(r => console.log(r));
-        res.send('created!');
     }
 
+    @put('/put')
+    patchStory(req: Request, res: Response): void {
+        let userStoryId: string = req.body._id;
+        let userStory: UserStoryInterface = req.body;
+        const userStoryServiceInstance = Container.get(UserStoryService);
+        userStoryServiceInstance.updateUserStory(userStory, userStoryId).then(r => console.log(r));
+        res.send('patched!');
+    }
 }
