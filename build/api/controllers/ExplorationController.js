@@ -32,14 +32,17 @@ var ExplorationController = /** @class */ (function () {
     ExplorationController.prototype.createStory = function (req, res) {
         var userStory = req.body;
         var userStoryServiceInstance = typedi_1.Container.get(UserStoryService_1.UserStoryService);
-        userStoryServiceInstance.createUserStory(userStory).then(function (r) { return console.log(r); });
+        userStoryServiceInstance.createUserStory(userStory).then(function (result) {
+            res.send(result);
+        });
     };
     ExplorationController.prototype.patchStory = function (req, res) {
         var userStoryId = req.body._id;
         var userStory = req.body;
         var userStoryServiceInstance = typedi_1.Container.get(UserStoryService_1.UserStoryService);
-        userStoryServiceInstance.updateUserStory(userStory, userStoryId).then(function (r) { return console.log(r); });
-        res.send('patched!');
+        userStoryServiceInstance.updateUserStory(userStory, userStoryId).then(function (result) {
+            res.send(result);
+        });
     };
     __decorate([
         decorators_1.del('/delete'),

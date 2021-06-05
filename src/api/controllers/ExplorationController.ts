@@ -34,7 +34,9 @@ class ExplorationController {
     createStory(req: Request, res: Response): void {
         let userStory: UserStoryInterface = req.body;
         const userStoryServiceInstance = Container.get(UserStoryService);
-        userStoryServiceInstance.createUserStory(userStory).then(r => console.log(r));
+        userStoryServiceInstance.createUserStory(userStory).then(function (result: any) {
+            res.send(result);
+        });
     }
 
     @put('/put')
@@ -42,7 +44,8 @@ class ExplorationController {
         let userStoryId: string = req.body._id;
         let userStory: UserStoryInterface = req.body;
         const userStoryServiceInstance = Container.get(UserStoryService);
-        userStoryServiceInstance.updateUserStory(userStory, userStoryId).then(r => console.log(r));
-        res.send('patched!');
+        userStoryServiceInstance.updateUserStory(userStory, userStoryId).then(function (result: any) {
+            res.send(result);
+        });
     }
 }
