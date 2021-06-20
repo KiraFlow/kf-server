@@ -16,6 +16,13 @@ var ExplorationController = /** @class */ (function () {
     function ExplorationController(userStoryService) {
         this.userStoryService = userStoryService;
     }
+    ExplorationController.prototype.updateBoardOrder = function (req, res) {
+        var boardStories = req.body.userStory;
+        var userStoryServiceInstance = typedi_1.Container.get(UserStoryService_1.UserStoryService);
+        userStoryServiceInstance.updateBoardStories(boardStories).then(function (result) {
+            res.send(result);
+        });
+    };
     ExplorationController.prototype.deleteStory = function (req, res) {
         var userStoryId = req.body.userStoryId;
         var userStoryServiceInstance = typedi_1.Container.get(UserStoryService_1.UserStoryService);
@@ -44,6 +51,12 @@ var ExplorationController = /** @class */ (function () {
             res.send(result);
         });
     };
+    __decorate([
+        decorators_1.put('/update-board'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", void 0)
+    ], ExplorationController.prototype, "updateBoardOrder", null);
     __decorate([
         decorators_1.del('/delete'),
         __metadata("design:type", Function),

@@ -65,9 +65,38 @@ var UserStoryService = /** @class */ (function () {
             });
         });
     };
+    UserStoryService.prototype.updateBoardStories = function (stories) {
+        return __awaiter(this, void 0, void 0, function () {
+            var ops, err_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        ops = null;
+                        ops = stories.map(function (x) { return ({ updateOne: {
+                                filter: { _id: x._id },
+                                update: { $set: { "listIndex": x.listIndex, "position": x.position } }, upsert: true
+                            }
+                        }); });
+                        if (!ops) return [3 /*break*/, 5];
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, userStory_1.UserStory.bulkWrite(ops)];
+                    case 2:
+                        _a.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        err_1 = _a.sent();
+                        throw err_1;
+                    case 4: return [2 /*return*/, true];
+                    case 5: return [2 /*return*/, false];
+                }
+            });
+        });
+    };
     UserStoryService.prototype.updateUserStory = function (story, storyId) {
         return __awaiter(this, void 0, void 0, function () {
-            var err_1;
+            var err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -77,23 +106,6 @@ var UserStoryService = /** @class */ (function () {
                         _a.sent();
                         return [3 /*break*/, 3];
                     case 2:
-                        err_1 = _a.sent();
-                        throw err_1;
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    UserStoryService.prototype.deleteUserStory = function (userStoryId) {
-        return __awaiter(this, void 0, void 0, function () {
-            var err_2;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, userStory_1.UserStory.deleteOne({ _id: userStoryId })];
-                    case 1: return [2 /*return*/, _a.sent()];
-                    case 2:
                         err_2 = _a.sent();
                         throw err_2;
                     case 3: return [2 /*return*/];
@@ -101,9 +113,26 @@ var UserStoryService = /** @class */ (function () {
             });
         });
     };
-    UserStoryService.prototype.getUserStories = function () {
+    UserStoryService.prototype.deleteUserStory = function (userStoryId) {
         return __awaiter(this, void 0, void 0, function () {
             var err_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, userStory_1.UserStory.deleteOne({ _id: userStoryId })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                    case 2:
+                        err_3 = _a.sent();
+                        throw err_3;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    UserStoryService.prototype.getUserStories = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -111,8 +140,8 @@ var UserStoryService = /** @class */ (function () {
                         return [4 /*yield*/, userStory_1.UserStory.find({})];
                     case 1: return [2 /*return*/, _a.sent()];
                     case 2:
-                        err_3 = _a.sent();
-                        throw err_3;
+                        err_4 = _a.sent();
+                        throw err_4;
                     case 3: return [2 /*return*/];
                 }
             });

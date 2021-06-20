@@ -6,12 +6,30 @@ import {Service} from 'typedi';
 export class UserStoryService {
 
     async createUserStory(story: UserStoryInterface) {
-
         await UserStory.updateMany({listIndex: 0},  {$inc : {'position' : 1}});
-
         const userStory = UserStory.build(story);
         await userStory.save();
         return true;
+    }
+
+    async updateBoardStories(stories: any) {
+        var ops = null;
+
+        ops = stories.map((x: any) => ({ updateOne: {
+                filter: { _id: x._id},
+                update: { $set: {"listIndex": x.listIndex, "position": x.position} }, upsert: true }
+        }));
+
+        if(ops) {
+            try {
+                await UserStory.bulkWrite(ops);
+            } catch (err) {
+                throw err;
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     async updateUserStory(story: UserStoryInterface, storyId: string) {

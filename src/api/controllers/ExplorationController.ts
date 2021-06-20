@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {get, post, del, put, controller} from "../decorators";
+import {get, post, del, put, patch, controller} from "../decorators";
 import {UserStoryService} from "../../services/UserStoryService";
 import {Container, Service} from 'typedi';
 import {UserStoryInterface} from "../../models/userStories/userStoryInterface";
@@ -11,6 +11,15 @@ class ExplorationController {
     constructor(
         private userStoryService: UserStoryService
     ) {
+    }
+
+    @put('/update-board')
+    updateBoardOrder(req: Request, res: Response): void {
+        let boardStories = req.body.userStory;
+        const userStoryServiceInstance = Container.get(UserStoryService);
+        userStoryServiceInstance.updateBoardStories(boardStories).then(function (result: any) {
+            res.send(result);
+        });
     }
 
     @del('/delete')
