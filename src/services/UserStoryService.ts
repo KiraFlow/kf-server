@@ -9,7 +9,7 @@ export class UserStoryService {
         await UserStory.updateMany({listIndex: 0},  {$inc : {'position' : 1}});
         const userStory = UserStory.build(story);
         await userStory.save();
-        return true;
+        return userStory;
     }
 
     async updateBoardStories(stories: any) {
