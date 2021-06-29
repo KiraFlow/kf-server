@@ -1,22 +1,21 @@
 import {Request, Response} from "express";
 import {get, post, del, put, patch, controller} from "../decorators";
-import {UserStoryService} from "../../services/UserStoryService";
+import {ExplorationService} from "../../services/ExplorationService";
 import {Container, Service} from 'typedi';
-import {UserStoryInterface} from "../../models/userStories/userStoryInterface";
-
+import {explorationStories} from "../../models/userStories/userStoryDoc";
 
 @controller('/exploration')
 class ExplorationController {
 
     constructor(
-        private userStoryService: UserStoryService
+        private userStoryService: ExplorationService
     ) {
     }
 
     @put('/update-board')
     updateBoardOrder(req: Request, res: Response): void {
         let boardStories = req.body.userStory;
-        const userStoryServiceInstance = Container.get(UserStoryService);
+        const userStoryServiceInstance = Container.get(ExplorationService);
         userStoryServiceInstance.updateBoardStories(boardStories).then(function (result: any) {
             res.send(result);
         });
@@ -25,7 +24,7 @@ class ExplorationController {
     @del('/delete')
     deleteStory(req: Request, res: Response): void {
         let userStoryId: string = req.body.userStoryId;
-        const userStoryServiceInstance = Container.get(UserStoryService);
+        const userStoryServiceInstance = Container.get(ExplorationService);
         userStoryServiceInstance.deleteUserStory(userStoryId).then(function (result: any) {
             res.send(result);
         });
@@ -33,7 +32,7 @@ class ExplorationController {
 
     @get('/get')
     getStories(req: Request, res: Response) {
-        const userStoryServiceInstance = Container.get(UserStoryService);
+        const userStoryServiceInstance = Container.get(ExplorationService);
         userStoryServiceInstance.getUserStories().then(function (result: any) {
             res.send(result);
         });
@@ -41,8 +40,8 @@ class ExplorationController {
 
     @post('/create')
     createStory(req: Request, res: Response): void {
-        let userStory: UserStoryInterface = req.body;
-        const userStoryServiceInstance = Container.get(UserStoryService);
+        let userStory: explorationStories = req.body;
+        const userStoryServiceInstance = Container.get(ExplorationService);
         userStoryServiceInstance.createUserStory(userStory).then(function (result: any) {
             res.send(result);
         });
@@ -51,8 +50,8 @@ class ExplorationController {
     @put('/put')
     patchStory(req: Request, res: Response): void {
         let userStoryId: string = req.body._id;
-        let userStory: UserStoryInterface = req.body;
-        const userStoryServiceInstance = Container.get(UserStoryService);
+        let userStory: explorationStories = req.body;
+        const userStoryServiceInstance = Container.get(ExplorationService);
         userStoryServiceInstance.updateUserStory(userStory, userStoryId).then(function (result: any) {
             res.send(result);
         });

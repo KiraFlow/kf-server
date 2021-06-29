@@ -1,5 +1,6 @@
 import mongoose, {Schema} from "mongoose";
-import {UserStoryInterface, UserStoryModelInterface, UserStoryDoc} from "./userStoryInterface";
+import {UserStoryModelInterface, UserStoryDoc} from "./userStoryDoc";
+import {UserStoryInterface} from "../../Interfaces/userStoryInterface";
 
 const userStorySchema = new mongoose.Schema({
     title: String,
@@ -7,7 +8,7 @@ const userStorySchema = new mongoose.Schema({
     estimation: Number,
     listIndex: Number,
     position: Number,
-    creationDate: Date
+    creationDate: Date,
 });
 
 userStorySchema.statics.build = (story: UserStoryInterface) => {
@@ -15,6 +16,5 @@ userStorySchema.statics.build = (story: UserStoryInterface) => {
 }
 
 const UserStory = mongoose.model<UserStoryDoc, UserStoryModelInterface>('UserStory', userStorySchema);
-
 
 export {UserStory}

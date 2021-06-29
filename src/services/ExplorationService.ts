@@ -1,11 +1,12 @@
-import {UserStoryInterface} from "../models/userStories/userStoryInterface";
+import {explorationStories} from "../models/userStories/userStoryDoc";
 import {UserStory} from "../models/userStories/userStory";
 import {Service} from 'typedi';
 
 @Service()
-export class UserStoryService {
+export class ExplorationService {
 
-    async createUserStory(story: UserStoryInterface) {
+    async createUserStory(story: explorationStories) {
+
         await UserStory.updateMany({listIndex: 0},  {$inc : {'position' : 1}});
         const userStory = UserStory.build(story);
         await userStory.save();
@@ -32,7 +33,7 @@ export class UserStoryService {
         }
     }
 
-    async updateUserStory(story: UserStoryInterface, storyId: string) {
+    async updateUserStory(story: explorationStories, storyId: string) {
         try {
             await UserStory.updateOne({_id: storyId},  story);
         } catch (err) {
