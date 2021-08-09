@@ -3,7 +3,6 @@ import {UserStoryModelInterface, UserStoryDoc} from "./userStoryDoc";
 import {UserStoryInterface} from "../../Interfaces/userStoryInterface";
 import {userStorySchema} from "../../schemas/userStoriesSchema";
 
-
 userStorySchema.statics.build = (story: UserStoryInterface) => {
     return new UserStory(story);
 }

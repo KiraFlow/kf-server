@@ -7,4 +7,8 @@ export const userStorySchema = new mongoose.Schema({
     listIndex: Number,
     position: Number,
     creationDate: Date,
+    planing: {
+        listIndex: Number,
+        position: Number,
+    }
 });

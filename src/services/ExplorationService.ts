@@ -8,6 +8,7 @@ export class ExplorationService {
     async createUserStory(story: explorationStories) {
 
         await UserStory.updateMany({listIndex: 0},  {$inc : {'position' : 1}});
+        await UserStory.updateMany({'planing.listIndex': 0},  {$inc : {'planing.position' : 1}});
         const userStory = UserStory.build(story);
         await userStory.save();
         return userStory;
@@ -18,7 +19,7 @@ export class ExplorationService {
 
         ops = stories.map((x: any) => ({ updateOne: {
                 filter: { _id: x._id},
-                update: { $set: {"listIndex": x.listIndex, "position": x.position} }, upsert: true }
+                update: { $set: {"listIndex": x.listIndex, "position": x.position, "planing.listIndex": x.planing.listIndex,"planing.position": x.planing.position} }, upsert: true }
         }));
 
         if(ops) {
